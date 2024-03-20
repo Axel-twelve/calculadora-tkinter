@@ -18,7 +18,7 @@ class View(tk.Tk): ##clase vista y heredamos tk
 
 
     def main(self):###función para lanzar la ventana
-        self.mainloop()
+        self.mainloop()  
    
 
 class Model: ##clase modelo

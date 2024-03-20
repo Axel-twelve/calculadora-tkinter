@@ -14,7 +14,8 @@ class View(tk.Tk): ##clase vista y heredamos tk
     def __init__(self, controller):
         super().__init__()
         self.controller=controller ##acceder a la clase controller
-    
+        self.title('Mi calculadora') ##titulo de la ventana
+
 
     def main(self):###función para lanzar la ventana
         self.mainloop()
@@ -38,18 +39,4 @@ class Controller:##clase controlador
 if __name__=='__main__': ## creamos la inicialización del modelo
     calculator=Controller() ##probando el modelo
     calculator.main() ##llamamos a la funcion del modelo
-     
-
     
-    ###para guardarlo
-    ## debes de correr primero el código 
-    ### te vas a la llave y te aparecera uun numero
-    ### le daras en el mas y arriba le picas en el cuadrito para guardar
-    ### de ahi en los 3 puntitos
-    ## le picas al cuadrito de arriba
-        
-
-#grabar unas historias del contenido que haces en hisoka
-#redacto -- instagram
-
-

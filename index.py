@@ -14,7 +14,7 @@ class View(tk.Tk): ##clase vista y heredamos tk
     def __init__(self, controller):
         super().__init__()
         self.controller=controller ##acceder a la clase controller
-        self.title('Mi calculadora') ##titulo de la ventana
+        self.title('Mi calculadora_hola') ##titulo de la ventana
 
 
     def main(self):###función para lanzar la ventana

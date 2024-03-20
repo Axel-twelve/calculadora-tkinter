@@ -40,9 +40,18 @@ class Controller:##clase controlador
 
 
 if __name__=='__main__': ## creamos la inicialización del modelo
-    hola=input('que show')
+    hola=input('que show hpolala')
     calculator=Controller(hola) ##probando el modelo
     vista=View()
     vista.imprimir()###llamamos a la funcion del modelo
     calculator.main()
     calculator.intro()
+
+    
+    ###para guardarlo
+    ## debes de correr primero el código 
+    ### te vas a la llave y te aparecera uun numero
+    ### le daras en el mas y arriba le picas en el cuadrito para guardar
+    ### de ahi en los 3 puntitos 
+    ## le picas al cuadrito de arriba
+

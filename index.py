@@ -5,8 +5,7 @@
 
 import tkinter as tk ##libreria de tkinter para el lanzamiento de ventanas
 from tkinter import ttk ##librería más moderna de tkinter temática
-from tkinter.constants import COMMAND, CURRENT, END, INSERT
-import math
+
 
 
 ##creamos las 3 clases como el MVC
@@ -34,7 +33,6 @@ class View(tk.Tk): ##clase vista y heredamos tk
         self.boton_3a7()
         self.boton_0a4()
         self.simbolos()
-        #self.boton_arriba()
         
         
     
@@ -64,15 +62,12 @@ class View(tk.Tk): ##clase vista y heredamos tk
         self.frame_grid=ttk.Frame(self)# height=200, width=100)##creamos el marco o ventana para que salte 
         self.frame_grid.pack()#padx=30, pady=30)
 
-    ##cuadro de ventana 
+
+    ##pantalla de calculadora
     def cuadro(self):
         self.rr=tk.Entry(self.main_fr, font=("default, 11"), insertontime=0, bd=5, width=21, borderwidth=10, foreground="#ff0000", highlightthickness=5, highlightcolor="#f5d0d0", highlightbackground="#f5d0d0",textvariable=self.value_Var, state='disable')
         self.rr.grid()#side=tk.LEFT)
 
-
-    def titulo_etiqueta(self):
-        self.la=ttk.Label(self.main_frame, text='Calculadora Hisoka', font=('Arial', 18))
-        self.la.pack()#padx=30, pady=50)
     
     number=['1','2','3','4','5','6','7','8','9','+','/','-']
     simbols=['0','X', '+','/','.','-','%','C','=']
@@ -87,6 +82,7 @@ class View(tk.Tk): ##clase vista y heredamos tk
                 oneButton1 = tk.Button(self.main_frame, text=numero,width=5, padx=10, pady=10, font=("Arial", 20),command=lambda num=numero: self.controller.click_boton(num), bg='lightblue')#, bg='blue')
                 oneButton1.pack(side='left')
     
+    
     #numero 1 al 3 y +
     def boton_0a4(self):
         for numero in self.number:
@@ -98,6 +94,7 @@ class View(tk.Tk): ##clase vista y heredamos tk
                 oneButton1.pack(side='left')
     
 
+    
      
     #simbolos 
     def simbolos(self):
@@ -127,10 +124,10 @@ class View(tk.Tk): ##clase vista y heredamos tk
     def boton_6a9(self):
         for numero in self.number:
             if numero > '6' and numero <= '9':    
-                oneButton1 = tk.Button(self.main_frame3, text=numero,width=5, padx=10, pady=10, font=("Arial", 20), command=lambda num=numero: self.controller.click_boton(num))
+                oneButton1 = tk.Button(self.main_frame3, text=numero,width=5, padx=10, pady=10, font=("Arial", 20), command=(lambda num=numero: self.controller.click_boton(num)))
                 oneButton1.pack(side='left')#,ipadx=20,ipady=30, anchor=tk.E)# padx=10,pady=10)
             elif numero =='-':
-                oneButton1 = tk.Button(self.main_frame3, text=numero,width=5, padx=10, pady=10, font=("Arial", 20),command=lambda num=numero: self.controller.click_boton(num), bg='lightblue')
+                oneButton1 = tk.Button(self.main_frame3, text=numero,width=5, padx=10, pady=10, font=("Arial", 20),command=(lambda num=numero: self.controller.click_boton(num)), bg='lightblue')
                 oneButton1.pack(side='left')
 
 
@@ -149,24 +146,39 @@ class View(tk.Tk): ##clase vista y heredamos tk
 
 class Model: ##clase modelo
     def __init__(self):
+        self.previous_value =''
         self.value=''
-
+        self.operator=''
+        
+        
     def operaciones(self, numero):
-        if numero =='C':
-            self.value=''
-        #else: pass
-        elif numero=='+':
-            self.value='gg'
-        else:
-            self.value += str(numero)    
-        #elif numero == str:
-         #   self.value='7'
-            
-        #elif isinstance (numero, int):
-         #   self.value += str(numero)
+        if numero == 'C':
+            self.value = ''
+            self.previous_value = ''
+            self.operator = ''
+        
+        
+        elif numero == '=':
+            value = self._evaluate()
+            #if '.0' in str(value):
+             #   value = int(value)
+            self.value = str(value)
+        
+        elif numero >='0' and numero <='9':  
+            self.value += str(numero)
 
+        #else:
+         #   if self.value:
+          #      self.operator = numero
+           #     self.previous_value = self.value
+            #    self.value = ''
+        
         return self.value
+    
+    def _evaluate(self):
+        return eval(self.previous_value+self.operator + self.value)
 
+        
 class Controller:##clase controlador
     def __init__ (self):
         self.model=Model()##llamamos a las otras clases

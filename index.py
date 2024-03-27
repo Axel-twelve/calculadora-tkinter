@@ -129,6 +129,7 @@ class Model: ##clase modelo
             self.value = ''
             self.previous_value = ''
             self.operator = ''
+            self.valuer=''
         
         ##buscar operar operando operando
         elif numero == '=':##devolver resultado
@@ -140,7 +141,23 @@ class Model: ##clase modelo
         elif numero=='+/-':
            self.value=self.value[1:] if self.value[0] =='-' else '-' + self.value
 
-        #elif numero =="%":
+        elif numero =="%":
+            
+            if self.value:
+                self.previous_value = (float(self.value)/100)
+                #self.value=''
+                
+                if self.value:
+                    return (str ((self.previous_value) * float(self.value)))
+                #self.value=''
+                #self.value
+                #print(float(self.previous_value)- float(self.value))
+
+                #self.previous_value = self.value
+                #self.value = ''
+          #      self.value == int(self.value) * int(self.value)
+           #     str(self.value)
+         #   self.value =str
          #   value=float(self.value) if '.' in self.value else int(self.value)
           #  self.value=str(value/100)
         
@@ -150,21 +167,15 @@ class Model: ##clase modelo
                 
         elif numero >='0' and numero <='9':  #devolver números
             self.value += numero
+            
+                
 
-    
-        #else: #función para los operadores
-         #   if self.value:#3 si la cadena no está vacía entra
-          #      self.operator = numero #será igual al operador
-           #     self.previous_value = self.value #previous toma el valor en self.value
-            #    self.value = '' ##self.value se vuelve nada para volver a comenzar
-        
+            
         else:
             if self.value:
-                self.operator = numero
-                #self.previous_value = self.value
-                self.value +=  self.operator
+                self.value += str(numero)
                 self.value
-
+            
         return self.value
     
     def _evaluate(self):##metodo privado, solo la uses aqui
@@ -181,16 +192,10 @@ class Controller:##clase controlador
         self.view.main()#llamamos a la funcion de View
    
     def click_boton(self, numero):##añadimos argumento numero de arriba
-        #self.model.operaciones
+        
         resultado=self.model.operaciones(numero)
-
         self.view.value_Var.set(resultado)
-        #self.model.value=''
-
-#def btn_click(item):
- #   global expression
-  #  expression = expression + str(item)
-   # input_text.set(expression)
+        
 
 if __name__=='__main__': ## creamos la inicialización del modelo
     calculator=Controller() ##probando el modelo
